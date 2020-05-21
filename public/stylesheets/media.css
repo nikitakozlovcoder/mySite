@@ -7,7 +7,13 @@
 
 
 @media screen and (min-width: 550px){
-
+    .service_cards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .service_cards .card{
+        width: calc(50% - 20px);
+    }
     .header_small {
         font-size: 13px;
         display: inline;
@@ -68,6 +74,9 @@
     }
 }
 @media screen and (min-width: 800px){
+    .service_cards .card{
+        width: calc(100% / 3  - 20px);
+    }
     .contact_me_form{
         flex-wrap: wrap;
     }
