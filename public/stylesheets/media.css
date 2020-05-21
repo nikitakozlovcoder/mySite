@@ -7,6 +7,25 @@
 
 
 @media screen and (min-width: 550px){
+    .blog_cards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .blog_card{
+        width: calc(50% - 20px);
+    }
+    .blog_card:last-child{
+        width: 100%;
+    }
+    .skills_container-right{
+        padding-left: 30px;
+    }
+    .skills_container-left{
+        padding-right: 30px;
+    }
+    .skills_container{
+        display: flex;
+    }
     .service_cards{
         display: flex;
         flex-wrap: wrap;
@@ -52,9 +71,63 @@
         padding-bottom: 45px;
     }
 }
+@supports (-ms-ime-align:auto) {
+     .latest_projects_container_project {
+        background-attachment: scroll  !important;
+    }
+    body{
 
+    }
+}
 @media screen and (min-width: 660px){
+    .scrolling .header_nav{
+        background-color: white;
+        color: #5d5d5d;
+    }
+    .scrolling .header_nav{
+        box-shadow: -1px 3px 2px 0px #73737370;
+    }
+    .header_nav  ul{
+        height: auto !important;
+        display: flex;
 
+    }
+    .header_nav .wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .header_nav ul li {
+        border: none !important;
+        margin: 0;
+    }
+    .header_nav ul li:hover{
+
+        color: #ff7d0a;
+    }
+    .hamburger{
+        display: none;
+    }
+    .blog_card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        width: calc(33.33% - 20px);
+        padding-top: 15px;
+        padding-bottom: 0;
+    }
+    .blog_card img{
+        margin-top: 20px;
+        padding-bottom: 0;
+        order:1;
+    }
+    .blog_card .button{
+        align-self: flex-start;
+    }
+    .blog_card:last-child{
+        width: calc(33.33% - 20px);
+    }
     .about_img {
         width: calc(50% - 65px);
 
@@ -74,8 +147,24 @@
     }
 }
 @media screen and (min-width: 800px){
+    .latest_projects_container_project_title{
+        position: relative;
+    }
+    .latest_projects_container_project_title:after{
+        content: "";
+        width:0%;
+        height: 2px;
+        background-color: #ff7d0a;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transition: width 0.25s ease-in-out;
+    }
+     .latest_projects_container_project:hover .latest_projects_container_project_title:after{
+        width: 100%;
+    }
     .service_cards .card{
-        width: calc(100% / 3  - 20px);
+        width: calc(33.33%  - 20px);
     }
     .contact_me_form{
         flex-wrap: wrap;
@@ -97,9 +186,12 @@
     }
 
     .latest_projects_container_project{
-      width: 100vw;
-      margin: 0;
-      min-height: 350px;
-      font-size: 30px;
+        width: 100vw;
+        margin: 0;
+        min-height: 485px;
+        font-size: 30px;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
     }
 }

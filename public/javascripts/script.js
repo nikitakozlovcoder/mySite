@@ -28,11 +28,12 @@
            let text =  el.querySelector('.skills_container_skill_percentage');
            let progress = el.querySelector('.skills_container_skill_progress_show');
            let percentage = progress.getAttribute('progress');
-           progress.style.width = percentage+"%";
+
            let data = 0;
            let interval = setInterval(()=>{
 
                 data++;
+               progress.style.width = data+"%";
                text.innerHTML = data+"%";
                if (data==percentage)
                {
@@ -58,4 +59,10 @@
     });
 
 
+})();
+
+(function () {
+
+    let links = Array.from(document.querySelectorAll('a')).filter(link => link.getAttribute( "href" )[0] === '#');
+    console.log(links);
 })();

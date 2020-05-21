@@ -21,24 +21,24 @@ a {
   color: #00B7FF;
 }
 header{
-  background-image: url("../images/header04.jpg");
+  background-image: url('../images/header03.jpg');
   background-attachment: fixed;
   position: relative;
-  background-position: center;
   background-size: cover;
+  background-position: bottom;
 }
 .overlay{
   position: absolute;
   left: 0;
   right: 0;
 
-  background-color: #07133896;
+  background-color: rgba(7, 19, 56, 0.59);
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 header > .wrap{
-  min-height: 62vh;
+  min-height: 67vh;
   color: white;
   display: flex;
   flex-direction: column
@@ -167,6 +167,7 @@ section:nth-child(2n) {
 }
 .header_info_col-text{
   padding: 80px 0;
+  max-width: 400px
 }
 .data_col{
   text-align: left;
@@ -311,7 +312,7 @@ h3{
   margin: 0 auto;
 }
 header nav ul{
-  height: 200px;
+  height: 274px;
   overflow: hidden;
   transition: height 0.25s ease-in-out;;
 }
@@ -348,7 +349,7 @@ header nav ul li:last-child{
   text-align: center;
 }
 
-.service_card_title {
+.service_card_title, .blog_card_title {
   font-size: 16px;
   font-weight: 600;
   padding: 15px 0;
@@ -380,8 +381,8 @@ header nav ul li:last-child{
  .skills_container_skill_progress_show{
    background-color: #1b2135;
    height: 5px;
-   width: 0;
-   transition: width 1s ease-in-out;
+   width: 0%;
+   
  }
 .latest_projects_container_project_title {
   color: white;
@@ -412,9 +413,9 @@ header nav ul li:last-child{
   display: none;
 }
 .latest_projects_control{
-  width: 20px;
-  height: 10px;
-  margin: 5px;
+  width: 25px;
+  height: 15px;
+  margin: 7px;
   background-color: #eeeeee;
   border-radius: 20px;
   cursor: pointer;
@@ -479,4 +480,8 @@ footer{
 }
 .contact_me_container{
   margin-top: 45px;
+}
+
+.skills_container_skill_name, .skills_container_skill_percentage{
+  padding-bottom: 15px;
 }
