@@ -57,8 +57,26 @@
         width: calc(50% + 65px);
 
     }
+    .contact{
+        font-size: 16px;
+    }
+    .contact_me_container{
+        display: flex;
+    }
+    .contact_me_form{
+        padding-left: 10px;
+    }
 }
 @media screen and (min-width: 800px){
+    .contact_me_form{
+        flex-wrap: wrap;
+    }
+    .contact_input{
+        width: calc(50% - 2px);
+    }
+    .contact_me_form textarea{
+        width: 100%;
+    }
     .latest_projects_controls{
         display: flex;
     }
@@ -73,6 +91,6 @@
       width: 100vw;
       margin: 0;
       min-height: 350px;
-        font-size: 30px;
+      font-size: 30px;
     }
 }

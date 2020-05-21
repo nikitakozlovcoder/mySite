@@ -38,7 +38,7 @@ header{
   z-index: 1;
 }
 header > .wrap{
-  min-height: 50vh;
+  min-height: 62vh;
   color: white;
   display: flex;
   flex-direction: column
@@ -156,21 +156,21 @@ section:nth-child(2n) {
 .contact{
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 15px;
 }
 .header_info_col-text{
   padding: 80px 0;
 }
-.contact_ico{
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 3px;
-  border-color: #ff7d0a;
-  background-color: #818181;
+.data_col{
+  text-align: left;
 }
+
+.contact_ico{
+  width: 40px;
+  display: flex;
+  align-items: center;
+}
+
 .contact_data{
   padding-left: 15px;
 }
@@ -197,6 +197,7 @@ section:nth-child(2n) {
   text-align: center;
   font-weight: bold;
   background-color: #ff7d0a;
+  transition: all 0.15s ease-in-out;
 
 }
 
@@ -336,7 +337,7 @@ header nav ul li:last-child{
   background-color: #f0f0f0;
   margin: 25px 10px;
   padding: 15px;
-  box-shadow: 0px 5px 5px 0px #1f1f1f61;
+  box-shadow: 0 5px 5px 0 #1f1f1f61;
 }
 
 .service_card_title {
@@ -412,4 +413,62 @@ header nav ul li:last-child{
 }
 .latest_projects_control-active{
   background-color: #ff7d0a;
+}
+
+.blog_cards{
+  margin-top:45px;
+}
+
+.blog_card{
+  box-shadow: none;
+  padding: 0 0 15px 0;
+  transition: box-shadow 0.25s ease-in-out;
+}
+.blog_card img{
+
+}
+.blog_card .blog_card_title, .blog_card p{
+  padding: 15px;
+}
+.blog_card .button{
+  margin: 0 15px;
+  background: transparent;
+  color: #5d5d5d;
+  border: 2px solid #5d5d5d;
+
+}
+.blog_card:hover{
+  box-shadow: 0 5px 5px 0 #1f1f1f61;
+}
+.button:hover{
+  border-color: transparent;
+  background-color: #ff7d0a;
+  transform: scale(1.1);
+  color: white;
+}
+
+footer{
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #f0f0f0;
+  border-top: 1px solid #c3b2b2;
+}
+
+@keyframes heart {
+  from { transform: scale(0.8); }
+  50% { transform: scale(1.2); }
+  to{transform: scale(0.8);}
+}
+.fa-heart{
+  color: palevioletred;
+  animation: heart 1.5s ease-in-out infinite;
+}
+.contact_me{
+  background-color: #f0f0f0;
+}
+.contact_me_container{
+  margin-top: 45px;
 }

@@ -1,5 +1,5 @@
 (function(){
-    let opened = true;
+
     let hamburger = document.querySelector('.hamburger');
     let header = document.querySelector('header');
 
@@ -11,7 +11,7 @@
     });
 
     window.addEventListener('scroll', ()=> {
-        if (pageYOffset>200)
+        if (pageYOffset>50)
         {
             header.classList.add('scrolling');
         }
