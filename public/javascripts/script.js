@@ -32,7 +32,7 @@
            let data = 0;
            let interval = setInterval(()=>{
 
-                data++;
+               data++;
                progress.style.width = data+"%";
                text.innerHTML = data+"%";
                if (data==percentage)
@@ -61,8 +61,68 @@
 
 })();
 
+
+    function scroll(el) {
+
+        let rect = el.getBoundingClientRect();
+        let dist = rect.top + window.pageYOffset;
+       // window.scrollTo({top: dist-50, behavior:"smooth"});
+        let chank = -(window.pageYOffset -dist)/20;
+        let down = true;
+        if (window.pageYOffset >dist)
+        {
+            down = false;
+
+        }
+
+        let interval = setInterval(()=>{
+
+            if (!down && window.pageYOffset === 0)
+            {
+                clearInterval(interval);
+                return;
+            }
+            if (down && document.body.clientHeight === window.pageYOffset + window.innerHeight)
+            {
+                clearInterval(interval);
+                return;
+            }
+            if (down && window.pageYOffset+65 >= dist)
+            {
+                clearInterval(interval);
+                return;
+            }
+            if(!down && window.pageYOffset+50 <= dist)
+            {
+                clearInterval(interval);
+                return;
+            }
+            window.scrollTo(0, window.pageYOffset+chank);
+
+
+        }, 25);
+
+    }
+
+
+
+
+
 (function () {
 
     let links = Array.from(document.querySelectorAll('a')).filter(link => link.getAttribute( "href" )[0] === '#');
     console.log(links);
+
+    links.forEach((el)=>{
+
+        el.addEventListener('click', (e)=>{
+            e.preventDefault();
+           scroll(document.querySelector(el.getAttribute('href')));
+        });
+
+    })
+
+
 })();
+
+

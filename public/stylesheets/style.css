@@ -184,6 +184,7 @@ section:nth-child(2n) {
 }
 
 .contact_input {
+  transition: border 0.25s ease-in-out;
   width: 100%;
   padding: 8px;
   margin: 10px 0 10px 0;
@@ -382,7 +383,7 @@ header nav ul li:last-child{
    background-color: #1b2135;
    height: 5px;
    width: 0%;
-   
+
  }
 .latest_projects_container_project_title {
   color: white;
@@ -484,4 +485,7 @@ footer{
 
 .skills_container_skill_name, .skills_container_skill_percentage{
   padding-bottom: 15px;
+}
+.contact_input:focus{
+  border-color: #ff7d0a;
 }
