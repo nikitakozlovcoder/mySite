@@ -22,25 +22,46 @@
 
     });
 })();
+function isViewed(el)
+{
+    if (el.getBoundingClientRect().top < window.innerHeight-65 &&  el.getBoundingClientRect().bottom>65)
+    {
+        return true;
 
+    }
+    return false;
+}
 (function () {
-    document.querySelectorAll('.skills_container_skill_wrap').forEach( el => {
-           let text =  el.querySelector('.skills_container_skill_percentage');
-           let progress = el.querySelector('.skills_container_skill_progress_show');
-           let percentage = progress.getAttribute('progress');
+    let active = false;
+    let container_left = document.querySelector('.skills_container-left');
+    let container_right = document.querySelector('.skills_container-right');
+    window.addEventListener('scroll', ()=>{
+        if ((isViewed(container_left) || isViewed(container_right)) && !active)
+        {
+            active = true;
+            document.querySelectorAll('.skills_container_skill_wrap').forEach( el => {
+                let text =  el.querySelector('.skills_container_skill_percentage');
+                let progress = el.querySelector('.skills_container_skill_progress_show');
+                let percentage = progress.getAttribute('progress');
 
-           let data = 0;
-           let interval = setInterval(()=>{
+                let data = 0;
+                let interval = setInterval(()=>{
 
-               data++;
-               progress.style.width = data+"%";
-               text.innerHTML = data+"%";
-               if (data==percentage)
-               {
-                   clearInterval(interval);
-               }
-           }, 10);
+                    data++;
+                    progress.style.width = data+"%";
+                    text.innerHTML = data+"%";
+                    if (data==percentage)
+                    {
+                        clearInterval(interval);
+                    }
+                }, 20);
+            });
+        }
+
     });
+
+
+
 })();
 
 (function () {
@@ -126,3 +147,30 @@
 })();
 
 
+function animateAll(elems)
+{
+    elems.forEach((el)=>{
+
+        if (isViewed((el)))
+        {
+            let time = el.getAttribute('data-time') || 0;
+
+            setTimeout(()=>{
+                console.log(time);
+                el.classList.add(el.getAttribute('data-animate'));
+            }, time)
+
+        }
+    })
+}
+
+(function () {
+    let elems = document.querySelectorAll('.animate__animated');
+    animateAll(elems);
+    window.addEventListener('scroll', function() {
+
+            animateAll(elems);
+
+    });
+
+})();

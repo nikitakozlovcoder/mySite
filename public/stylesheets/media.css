@@ -14,7 +14,8 @@
     .blog_card{
         width: calc(50% - 20px);
     }
-    .blog_card:last-child{
+    .blog_card:nth-child(2n){
+        order: 1;
         width: 100%;
     }
     .skills_container-right{
@@ -125,8 +126,9 @@
     .blog_card .button{
         align-self: flex-start;
     }
-    .blog_card:last-child{
+    .blog_card:nth-child(2n){
         width: calc(33.33% - 20px);
+        order: initial;
     }
     .about_img {
         width: calc(50% - 65px);

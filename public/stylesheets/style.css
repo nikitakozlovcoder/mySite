@@ -489,3 +489,13 @@ footer{
 .contact_input:focus{
   border-color: #ff7d0a;
 }
+.animate__animated{
+  opacity: 0;
+}
+.animate__lightSpeedInLeft{
+  opacity: 1;
+}
+.animate__flipInY{
+  opacity: 1;
+}
+
