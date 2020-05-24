@@ -498,4 +498,6 @@ footer{
 .animate__flipInY{
   opacity: 1;
 }
-
+input[type='sybmit']{
+  cursor: pointer;
+}

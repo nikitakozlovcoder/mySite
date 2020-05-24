@@ -88,7 +88,7 @@ function isViewed(el)
         let rect = el.getBoundingClientRect();
         let dist = rect.top + window.pageYOffset;
        // window.scrollTo({top: dist-50, behavior:"smooth"});
-        let chank = -(window.pageYOffset -dist)/20;
+        let chank = -(window.pageYOffset -dist)/50;
         let down = true;
         if (window.pageYOffset >dist)
         {
@@ -121,7 +121,7 @@ function isViewed(el)
             window.scrollTo(0, window.pageYOffset+chank);
 
 
-        }, 25);
+        }, 10);
 
     }
 
