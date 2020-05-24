@@ -79,6 +79,10 @@ function isViewed(el)
 
 (function () {
     let container = document.querySelector('.latest_projects_container ');
+    if (container === null)
+    {
+        return;
+    }
     document.querySelectorAll('.latest_projects_control').forEach((el, i, arr)=>{
 
         el.addEventListener('click', (e)=>{
@@ -186,4 +190,33 @@ function animateAll(elems)
 
     });
 
+})();
+(function () {
+    let form = document.querySelector('.contact_form');
+    if ( form === null) {
+        return;
+
+    }
+
+    form.addEventListener('submit', (e)=>{
+        let name = form.querySelectorAll('input')[0].value;
+        let mail = form.querySelectorAll('input')[1].value;
+        let text = form.querySelector('textarea').value;
+        let msg = {
+          name: name,
+          mail: mail,
+          message: text
+        };
+        e.preventDefault();
+        mail.value = "";
+        name.value = "";
+        text.value = "";
+        fetch('/sendmail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(msg)
+        })
+    });
 })();
