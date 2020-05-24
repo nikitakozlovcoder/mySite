@@ -1,10 +1,23 @@
 (function(){
-
+    let open = false;
     let hamburger = document.querySelector('.hamburger');
     let header = document.querySelector('header');
+    let links = document.querySelector('.header_nav').querySelectorAll('a');
+
+    links.forEach((el)=>{
+        el.addEventListener('click', (e)=>{
+            if (open)
+            {
+                hamburger.classList.toggle('hamburger_close');
+                header.classList.toggle('closed');
+                open = false;
+            }
+
+        });
+    });
 
     hamburger.addEventListener('click', ()=>{
-
+        open = !open;
         hamburger.classList.toggle('hamburger_close');
         header.classList.toggle('closed');
 
