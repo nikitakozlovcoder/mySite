@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const nodemailer = require('nodemailer');
 
 /* GET home page. */
@@ -13,7 +13,7 @@ router.post('/sendmail', function(req, res, next) {
     service: 'gmail',
     auth: {
       user: 'nekwebmailer@gmail.com',
-      pass: 'nekwebmailernekweb' // naturally, replace both with your real credentials or an application-specific password
+      pass: 'nekwebmailernekweb'
     }
   });
   const mailOptions = {
