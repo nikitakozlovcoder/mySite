@@ -473,7 +473,7 @@ footer{
   50% { transform: scale(1.2); }
   to{transform: scale(0.8);}
 }
-.fa-heart{
+.icon-heart:before{
   color: palevioletred;
   animation: heart 1.5s ease-in-out infinite;
 }
