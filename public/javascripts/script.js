@@ -199,6 +199,7 @@ function animateAll(elems)
     }
 
     form.addEventListener('submit', (e)=>{
+        e.preventDefault();
         let name = form.querySelectorAll('input')[0].value;
         let mail = form.querySelectorAll('input')[1].value;
         let text = form.querySelector('textarea').value;
@@ -207,7 +208,6 @@ function animateAll(elems)
           mail: mail,
           message: text
         };
-        e.preventDefault();
         mail.value = "";
         name.value = "";
         text.value = "";
