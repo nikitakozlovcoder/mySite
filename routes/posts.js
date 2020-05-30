@@ -3,10 +3,12 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const multer  = require('multer');
-const crypto = require("crypto")
+const crypto = require("crypto");
+const sharp = require('sharp');
+
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, path.join(__dirname, '../public/uploads'));
     },
     filename: function (req, file, cb) {
         cb(null, crypto.randomBytes(5).toString('hex')+"_"+Date.now() + '.'+file.mimetype.split('/')[1]);
@@ -65,17 +67,31 @@ router.post('/new', upload.single('thumbnail'), function(req, res, next) {
         post.text = req.body.text;
         data.push(post);
         console.log(req.file);
-        fs.writeFile(path.join(__dirname, '../data/posts.json'), JSON.stringify(data), (err, data)=>{
+        post.thumbnail = req.file.filename;
+
+        fs.writeFile(path.join(__dirname, '../data/posts.json'), JSON.stringify(data), (err)=>{
             if (err) {
                 console.log(err);
                 res.status(500).send();
             }
             else {
-                res.status(201).send();
+                let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+                let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+                sharp(path_from)
+                    .resize(400, 200, {fit: sharp.fit.inside })
+                    .toFile(path_to, (err, info) => {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send();
+                        }
+                        else {
+                            res.status(201).send();
+                        }
+                    });
             }
         });
     });
-    post.thumbnail = req.file.filename;
+
 
 
 
