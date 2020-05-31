@@ -24,14 +24,8 @@ posts.getAutoincrementId = function () {
             }
         );
     });
-
-
 };
 
-
-getAutoId = function() {
-
-};
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../public/uploads'));
@@ -40,8 +34,8 @@ let storage = multer.diskStorage({
         cb(null, crypto.randomBytes(5).toString('hex')+"_"+Date.now() + '.'+file.mimetype.split('/')[1]);
     }
 });
-const upload = multer({ storage: storage });
 
+const upload = multer({ storage: storage });
 
 router.get('/all', function(req, res, next) {
 
@@ -59,6 +53,8 @@ router.get('/:id', function(req, res, next) {
 
 });
 router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
+
+
     let insert = function(post) {
         return new Promise((resolve, reject)=>{
             posts.insert(post, (err, doc)=>{
@@ -70,19 +66,22 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
     post.title = req.body.title;
     post.description = req.body.description;
     post.text = req.body.text;
-    post.thumbnail = req.file.filename;
+    post.thumbnail = req.file ? req.file.filename : "";
     post.id = await posts.getAutoincrementId();
 
 
-    let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
-    let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
-    try {
-        let sh = sharp(path_from)
-        .resize(400, 200, {fit: sharp.fit.inside })
-        .toFile(path_to);
 
+    try {
         let ins = insert(post);
-        await sh;
+        if (req.file)
+        {
+            let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+            let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+            let sh = sharp(path_from)
+                .resize(400, 200, {fit: sharp.fit.inside })
+                .toFile(path_to);
+            await sh;
+        }
         await ins;
         res.status(201).send();
     }
@@ -97,8 +96,11 @@ router.delete('/:id', (req, res)=>{
 
     posts.findOne({id: Number(req.params.id)}, (e, post)=>{
         if (e) {
-            console.log(err);
+            console.log(e);
             res.status(500).send();
+        }
+        else if(!post) {
+            res.status(404).send();
         }
         else {
             posts.remove({id: Number(req.params.id)}, {}, function (err, numRemoved) {
@@ -117,6 +119,37 @@ router.delete('/:id', (req, res)=>{
         }
 
     })
+
+});
+
+router.put('/:id', upload.single('thumbnail'), (req, res)=>{
+
+    let post = {};
+    post.title = req.body.title;
+    post.description = req.body.description;
+    post.text = req.body.text;
+    post.id = Number(req.params.id);
+
+    if (req.file) {
+        console.log('yes');
+    }
+    else {
+        posts.findOne({id: Number(req.params.id)}, (e, doc)=>{
+            if (!doc) {
+                res.status(404).send();
+            }
+            post.thumbnail = doc.thumbnail;
+            posts.update({id: Number(req.params.id)}, post, {}, (err, numReplaced)=>{
+               if (err) {
+                   console.log(err);
+                   res.status(500).send();
+               }
+               else {
+                   res.status(200).send();
+               }
+            });
+        });
+    }
 
 });
 
