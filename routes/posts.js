@@ -8,7 +8,7 @@ const sharp = require('sharp');
 const Datastore = require('nedb')
 let posts = new Datastore(path.join(__dirname, '../data/posts.db'));
 posts.loadDatabase();
-
+sharp.cache({ files : 0 });
 posts.getAutoincrementId = function () {
     let ctx = this;
     return new Promise((resolve, reject)=>{
@@ -122,7 +122,21 @@ router.delete('/:id', (req, res)=>{
 
 });
 
-router.put('/:id', upload.single('thumbnail'), (req, res)=>{
+router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
+
+    let update = function(id, post) {
+        return new Promise((resolve, reject)=>{
+            posts.update({id: Number(id)}, post, {}, (err, numReplaced)=>{
+                if (err) {
+                    reject(err);
+
+                }
+                else {
+                    resolve(err);
+
+                }
+            });
+        })};
 
     let post = {};
     post.title = req.body.title;
@@ -131,7 +145,39 @@ router.put('/:id', upload.single('thumbnail'), (req, res)=>{
     post.id = Number(req.params.id);
 
     if (req.file) {
-        console.log('yes');
+
+        post.thumbnail = req.file.filename;
+        posts.findOne({id: Number(req.params.id)}, async (e, doc)=>{
+            if (!doc) {
+                res.status(404).send();
+            }
+            else {
+                try {
+                    let path_full = path.join(__dirname, '../public/uploads/'+doc.thumbnail);
+                    let path_small = path.join(__dirname, '../public/uploads/small/'+doc.thumbnail);
+                    let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+                    let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+                    fs.unlink(path_full, (e)=>{
+                        console.log(e);
+                    });
+                    fs.unlink(path_small, ()=>{});
+                    let u = update(req.params.id, post);
+                    let sh = sharp(path_from)
+                        .resize(400, 200, {fit: sharp.fit.inside })
+                        .toFile(path_to);
+                    await sh;
+                    await u;
+
+                    res.status(200).send();
+                }
+                catch (e) {
+                    console.log(e);
+                    res.status(500).send();
+                }
+            }
+        });
+
+
     }
     else {
         posts.findOne({id: Number(req.params.id)}, (e, doc)=>{
@@ -150,7 +196,6 @@ router.put('/:id', upload.single('thumbnail'), (req, res)=>{
             });
         });
     }
-
 });
 
 module.exports = router;
