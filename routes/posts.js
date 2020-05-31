@@ -5,7 +5,33 @@ const fs = require('fs');
 const multer  = require('multer');
 const crypto = require("crypto");
 const sharp = require('sharp');
+const Datastore = require('nedb')
+let posts = new Datastore(path.join(__dirname, '../data/posts.db'));
+posts.loadDatabase();
 
+posts.getAutoincrementId = function () {
+    let ctx = this;
+    return new Promise((resolve, reject)=>{
+        ctx.update(
+            { _id: '__autoid__' },
+            { $inc: { seq: 1 } },
+            { upsert: true, returnUpdatedDocs: true },
+            function (err, affected, autoid) {
+               if (err) {
+                   reject(err);
+               }
+                resolve(autoid.seq);
+            }
+        );
+    });
+
+
+};
+
+
+getAutoId = function() {
+
+};
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../public/uploads'));
@@ -16,84 +42,82 @@ let storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-function read_posts_file(callback)
-{
-    fs.readFile(path.join(__dirname, '../data/posts.json'), (err, data)=>{
-        if(err) {
-            console.log(err);
-            res.status(500).send();
-        }
-        else {
-            callback(JSON.parse(data));
-        }
-    });
-}
+
 router.get('/all', function(req, res, next) {
 
-       res.sendFile(path.join(__dirname, '../data/posts.json'));
+       posts.find({ $not: { _id: '__autoid__' } }, (err, docs)=>{
+
+            res.json(docs);
+       });
 });
 
 router.get('/:id', function(req, res, next) {
 
-    read_posts_file((data)=>{
-        let f=false;
-
-        data.forEach((el)=>{
-            console.log(el);
-            if(el.id === Number(req.params.id)) {
-                f=true;
-                res.json(el);
-
-            }
-        });
-        if (!f) {
-            res.status(404).send();
-        }
+    posts.findOne({id: Number(req.params.id)}, (err, post)=>{
+        res.json(post);
     });
 
 });
-router.post('/new', upload.single('thumbnail'), function(req, res, next) {
-
+router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
+    let insert = function(post) {
+        return new Promise((resolve, reject)=>{
+            posts.insert(post, (err, doc)=>{
+                if (err) reject(err);
+                resolve(doc);
+            });
+        })};
     let post = {};
-    let id=1;
-    read_posts_file((data)=>{
-        if (data.length > 0)
-        {
-           id = data[data.length-1].id+1;
-        }
-        post.id = id;
-        post.title = req.body.title;
-        post.description = req.body.description;
-        post.text = req.body.text;
-        data.push(post);
-        console.log(req.file);
-        post.thumbnail = req.file.filename;
-
-        fs.writeFile(path.join(__dirname, '../data/posts.json'), JSON.stringify(data), (err)=>{
-            if (err) {
-                console.log(err);
-                res.status(500).send();
-            }
-            else {
-                let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
-                let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
-                sharp(path_from)
-                    .resize(400, 200, {fit: sharp.fit.inside })
-                    .toFile(path_to, (err, info) => {
-                        if (err) {
-                            console.log(err);
-                            res.status(500).send();
-                        }
-                        else {
-                            res.status(201).send();
-                        }
-                    });
-            }
-        });
-    });
+    post.title = req.body.title;
+    post.description = req.body.description;
+    post.text = req.body.text;
+    post.thumbnail = req.file.filename;
+    post.id = await posts.getAutoincrementId();
 
 
+    let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+    let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+    try {
+        let sh = sharp(path_from)
+        .resize(400, 200, {fit: sharp.fit.inside })
+        .toFile(path_to);
 
+        let ins = insert(post);
+        await sh;
+        await ins;
+        res.status(201).send();
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).send();
+    }
 
 });
+
+router.delete('/:id', (req, res)=>{
+
+    posts.findOne({id: Number(req.params.id)}, (e, post)=>{
+        if (e) {
+            console.log(err);
+            res.status(500).send();
+        }
+        else {
+            posts.remove({id: Number(req.params.id)}, {}, function (err, numRemoved) {
+                if (err){
+                    console.log(err);
+                    res.status(500).send();
+                }
+                else{
+                    let path_full = path.join(__dirname, '../public/uploads/'+post.thumbnail);
+                    let path_small = path.join(__dirname, '../public/uploads/small/'+post.thumbnail);
+                    fs.unlink(path_full, ()=>{});
+                    fs.unlink(path_small, ()=>{});
+                    res.status(200).send();
+                }
+            });
+        }
+
+    })
+
+});
+
 module.exports = router;
