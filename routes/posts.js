@@ -160,7 +160,9 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
                     fs.unlink(path_full, (e)=>{
                         console.log(e);
                     });
-                    fs.unlink(path_small, ()=>{});
+                    fs.unlink(path_small, (e)=>{
+                        console.log(e);
+                    });
                     let u = update(req.params.id, post);
                     let sh = sharp(path_from)
                         .resize(400, 200, {fit: sharp.fit.inside })
