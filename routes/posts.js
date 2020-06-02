@@ -7,8 +7,7 @@ const crypto = require("crypto");
 const sharp = require('sharp');
 const Datastore = require('nedb');
 const createError = require('http-errors');
-let posts = new Datastore(path.join(__dirname, '../data/posts.db'));
-posts.loadDatabase();
+let posts = new Datastore({filename:path.join(__dirname, '../data/posts.db'), autoload: true });
 sharp.cache({ files : 0 });
 
 posts.getAutoincrementId = function () {
@@ -202,4 +201,7 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
     }
 });
 
-module.exports = router;
+module.exports = {
+    route: router,
+    db: posts
+};

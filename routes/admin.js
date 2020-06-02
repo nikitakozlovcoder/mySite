@@ -5,11 +5,9 @@ const createError = require('http-errors');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-let users = new Datastore(path.join(__dirname, '../data/users.db'));
-let posts = new Datastore(path.join(__dirname, '../data/posts.db'));
-users.loadDatabase();
-posts.loadDatabase();
-
+let users = new Datastore({filename: path.join(__dirname, '../data/users.db'), autoload: true });
+const postsRouter = require('../routes/posts');
+let posts = postsRouter.db;
 
 
 bcrypt.hash("admin", saltRounds, function(err, hash) {
@@ -32,6 +30,7 @@ router.get('/', function(req, res, next) {
     else
     {
        console.log('dashboard');
+       console.log(posts);
        posts.find({ $not: { _id: '__autoid__' } }, (err, docs)=>{
            if (err) {
                console.log(err);

@@ -37,7 +37,7 @@ app.use("/public",express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/posts', postsRouter);
+app.use('/posts', postsRouter.route);
 app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
