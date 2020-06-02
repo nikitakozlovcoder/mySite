@@ -12,7 +12,7 @@ img {
   height: auto;
 }
 body {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   text-align: center;
   color: #5d5d5d;
   font-size: 14px;
@@ -21,7 +21,8 @@ body {
 a {
   color: #00B7FF;
 }
-header{
+.first-screen{
+  padding: 0;
   background-image: url('../images/header03.webp');
   background-attachment: fixed;
   position: relative;
@@ -38,7 +39,7 @@ header{
   height: 100%;
   z-index: 1;
 }
-header > .wrap{
+.first-screen > .wrap{
   min-height: 67vh;
   color: white;
   display: flex;
@@ -184,7 +185,7 @@ section:nth-child(2n) {
   padding-left: 15px;
 }
 
-.contact_input {
+.contact_input, .input {
   transition: border 0.25s ease-in-out;
   width: 100%;
   padding: 8px;
@@ -310,6 +311,7 @@ h3{
  padding: 10px 0;
  left: 0;
  top: 0;
+ color: white;
 
   margin: 0 auto;
 }
@@ -487,7 +489,7 @@ footer{
 .skills_container_skill_name, .skills_container_skill_percentage{
   padding-bottom: 15px;
 }
-.contact_input:focus{
+.contact_input:focus, .input:focus{
   border-color: #ff7d0a;
 }
 .animate__animated{

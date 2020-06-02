@@ -1,3 +1,18 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<style>
+    h1 , h2{
+        color: #ff7d0a;
+    }
+    body{
+        display: flex;
+    }
+    div{
+        margin: auto;
+        padding: 20px;
+    }
+</style>
+<div>
+    <h1>{{message}}</h1>
+    <h2>{{error.status}}</h2>
+    <pre>{{error.stack}}</pre>
+</div>
+

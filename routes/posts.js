@@ -5,10 +5,12 @@ const fs = require('fs');
 const multer  = require('multer');
 const crypto = require("crypto");
 const sharp = require('sharp');
-const Datastore = require('nedb')
+const Datastore = require('nedb');
+const createError = require('http-errors');
 let posts = new Datastore(path.join(__dirname, '../data/posts.db'));
 posts.loadDatabase();
 sharp.cache({ files : 0 });
+
 posts.getAutoincrementId = function () {
     let ctx = this;
     return new Promise((resolve, reject)=>{
@@ -83,11 +85,11 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
             await sh;
         }
         await ins;
-        res.status(201).send();
+        res.redirect('/admin');
     }
     catch (e) {
         console.log(e);
-        res.status(500).send();
+        createError(500);
     }
 
 });
@@ -97,23 +99,24 @@ router.delete('/:id', (req, res)=>{
     posts.findOne({id: Number(req.params.id)}, (e, post)=>{
         if (e) {
             console.log(e);
-            res.status(500).send();
+            createError(500);
+
         }
         else if(!post) {
-            res.status(404).send();
+            createError(404);
         }
         else {
             posts.remove({id: Number(req.params.id)}, {}, function (err, numRemoved) {
                 if (err){
                     console.log(err);
-                    res.status(500).send();
+                    createError(500);
                 }
                 else{
                     let path_full = path.join(__dirname, '../public/uploads/'+post.thumbnail);
                     let path_small = path.join(__dirname, '../public/uploads/small/'+post.thumbnail);
                     fs.unlink(path_full, ()=>{});
                     fs.unlink(path_small, ()=>{});
-                    res.status(200).send();
+                    res.redirect('/admin');
                 }
             });
         }
@@ -133,7 +136,6 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
                 }
                 else {
                     resolve(err);
-
                 }
             });
         })};
@@ -149,7 +151,7 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
         post.thumbnail = req.file.filename;
         posts.findOne({id: Number(req.params.id)}, async (e, doc)=>{
             if (!doc) {
-                res.status(404).send();
+                createError(404);
             }
             else {
                 try {
@@ -170,11 +172,11 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
                     await sh;
                     await u;
 
-                    res.status(200).send();
+                    res.redirect('/admin');
                 }
                 catch (e) {
                     console.log(e);
-                    res.status(500).send();
+                    createError(500);
                 }
             }
         });
@@ -184,16 +186,16 @@ router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
     else {
         posts.findOne({id: Number(req.params.id)}, (e, doc)=>{
             if (!doc) {
-                res.status(404).send();
+                createError(404);
             }
             post.thumbnail = doc.thumbnail;
             posts.update({id: Number(req.params.id)}, post, {}, (err, numReplaced)=>{
                if (err) {
                    console.log(err);
-                   res.status(500).send();
+                   createError(500);
                }
                else {
-                   res.status(200).send();
+                   res.redirect('/admin');
                }
             });
         });

@@ -1,12 +1,13 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const process = require('process');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
-
+const adminRouter = require('./routes/admin');
+const session = require('express-session');
+const crypto = require("crypto");
 const app = express();
 
 
@@ -16,19 +17,28 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 
+app.use(session({
+  secret: crypto.randomBytes(10).toString('hex'),
+  resave: true,
+  saveUninitialized: false,
+  cookie: { }
+}));
+
 app.use(express.json({
   verify: (req, res, buf) => {
     req.rawBody = buf
   }
 }));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+
 app.use("/public",express.static(path.join(__dirname, 'public')));
 
 
 
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

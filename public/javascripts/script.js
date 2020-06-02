@@ -3,7 +3,9 @@
     let hamburger = document.querySelector('.hamburger');
     let header = document.querySelector('header');
     let links = document.querySelector('.header_nav').querySelectorAll('a');
-
+    if (!hamburger) {
+        return;
+    }
     links.forEach((el)=>{
         el.addEventListener('click', (e)=>{
             if (open)
@@ -48,6 +50,9 @@ function isViewed(el)
     let active = false;
     let container_left = document.querySelector('.skills_container-left');
     let container_right = document.querySelector('.skills_container-right');
+    if (!container_left) {
+        return;
+    }
     window.addEventListener('scroll', ()=>{
         if ((isViewed(container_left) || isViewed(container_right)) && !active)
         {

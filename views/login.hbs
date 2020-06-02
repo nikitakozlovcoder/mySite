@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="../public/stylesheets/admin.css">
+
+<header class="closed scrolling" >
+    <nav class="header_nav">
+        <div class="wrap">
+            <div class="header_nav_wrapper">
+                <a href=".."><div class="header_logo">Nek<span>W</span>eb</div></a>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<form class="login_form" method="post" action="">
+    <input type="text" placeholder="Login..." class="input" required="true" name="login">
+    <input type="password" placeholder="Password" class="input" required="true" name="password">
+    {{#if error}}
+        Неверный логин или пароль. <br/>
+    {{/if}}
+
+    <input type="submit" value="Войти" class="button">
+
+</form>
+
+<footer>
+    <div>Сделано с  <i class="icon-heart"></i> ! @2020</div>
+    <div>Никита Козлов</div>
+</footer>
