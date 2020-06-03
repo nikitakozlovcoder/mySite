@@ -57,42 +57,45 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
     if (!req.session.user)
     {
         res.redirect('/admin/login');
-        return;
-    }
-    console.log(req.file);
-    let insert = function(post) {
-        return new Promise((resolve, reject)=>{
-            posts.insert(post, (err, doc)=>{
-                if (err) reject(err);
-                resolve(doc);
-            });
-        })};
-    let post = {};
-    post.title = req.body.title;
-    post.description = req.body.description;
-    post.text = req.body.text;
-    post.thumbnail = req.file ? req.file.filename : "";
-    post.id = await posts.getAutoincrementId();
+
+    }else{
+        console.log(req.file);
+        let insert = function(post) {
+            return new Promise((resolve, reject)=>{
+                posts.insert(post, (err, doc)=>{
+                    if (err) reject(err);
+                    resolve(doc);
+                });
+            })};
+        let post = {};
+        post.title = req.body.title;
+        post.description = req.body.description;
+        post.text = req.body.text;
+        post.thumbnail = req.file ? req.file.filename : "";
+        post.id = await posts.getAutoincrementId();
 
 
 
-    try {
-        let ins = insert(post);
-        if (req.file)
-        {
-            let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
-            let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
-            let sh = sharp(path_from)
-                .resize(400, 200, {fit: sharp.fit.inside })
-                .toFile(path_to);
-            await sh;
+        try {
+            let ins = insert(post);
+            if (req.file)
+            {
+                let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+                let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+                let sh = sharp(path_from)
+                    .resize(400, 200, {fit: sharp.fit.inside })
+                    .toFile(path_to);
+                await sh;
+            }
+            await ins;
+            res.redirect('/admin');
         }
-        await ins;
-        res.redirect('/admin');
-    }
-    catch (e) {
-        console.log(e);
-        createError(500);
+        catch (e) {
+            console.log(e);
+            createError(500);
+        }
+
+
     }
 
 });
@@ -101,34 +104,38 @@ router.post('/delete/:id', (req, res)=>{
     if (!req.session.user)
     {
         res.redirect('/admin/login');
-        return;
+
     }
-    posts.findOne({id: Number(req.params.id)}, (e, post)=>{
-        if (e) {
-            console.log(e);
-            createError(500);
+    else
+    {
+        posts.findOne({id: Number(req.params.id)}, (e, post)=>{
+            if (e) {
+                console.log(e);
+                createError(500);
 
-        }
-        else if(!post) {
-            createError(404);
-        }
-        else {
-            posts.remove({id: Number(req.params.id)}, {}, function (err, numRemoved) {
-                if (err){
-                    console.log(err);
-                    createError(500);
-                }
-                else{
-                    let path_full = path.join(__dirname, '../public/uploads/'+post.thumbnail);
-                    let path_small = path.join(__dirname, '../public/uploads/small/'+post.thumbnail);
-                    fs.unlink(path_full, ()=>{});
-                    fs.unlink(path_small, ()=>{});
-                    res.redirect('/admin');
-                }
-            });
-        }
+            }
+            else if(!post) {
+                createError(404);
+            }
+            else {
+                posts.remove({id: Number(req.params.id)}, {}, function (err, numRemoved) {
+                    if (err){
+                        console.log(err);
+                        createError(500);
+                    }
+                    else{
+                        let path_full = path.join(__dirname, '../public/uploads/'+post.thumbnail);
+                        let path_small = path.join(__dirname, '../public/uploads/small/'+post.thumbnail);
+                        fs.unlink(path_full, ()=>{});
+                        fs.unlink(path_small, ()=>{});
+                        res.redirect('/admin');
+                    }
+                });
+            }
 
-    })
+        })
+    }
+
 
 });
 
@@ -136,81 +143,85 @@ router.post('/update/:id', upload.single('thumbnail'),  (req, res)=>{
     if (!req.session.user)
     {
         res.redirect('/admin/login');
-        return;
-    }
-    let update = function(id, post) {
-        return new Promise((resolve, reject)=>{
-            posts.update({id: Number(id)}, post, {}, (err, numReplaced)=>{
-                if (err) {
-                    reject(err);
 
+    }
+    else
+    {
+        let update = function(id, post) {
+            return new Promise((resolve, reject)=>{
+                posts.update({id: Number(id)}, post, {}, (err, numReplaced)=>{
+                    if (err) {
+                        reject(err);
+
+                    }
+                    else {
+                        resolve(err);
+                    }
+                });
+            })};
+
+        let post = {};
+        post.title = req.body.title;
+        post.description = req.body.description;
+        post.text = req.body.text;
+        post.id = Number(req.params.id);
+
+        if (req.file) {
+
+            post.thumbnail = req.file.filename;
+            posts.findOne({id: Number(req.params.id)}, async (e, doc)=>{
+                if (!doc) {
+                    createError(404);
                 }
                 else {
-                    resolve(err);
+                    try {
+                        let path_full = path.join(__dirname, '../public/uploads/'+doc.thumbnail);
+                        let path_small = path.join(__dirname, '../public/uploads/small/'+doc.thumbnail);
+                        let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
+                        let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
+                        fs.unlink(path_full, (e)=>{
+                            console.log(e);
+                        });
+                        fs.unlink(path_small, (e)=>{
+                            console.log(e);
+                        });
+                        let u = update(req.params.id, post);
+                        let sh = sharp(path_from)
+                            .resize(400, 200, {fit: sharp.fit.inside })
+                            .toFile(path_to);
+                        await sh;
+                        await u;
+
+                        res.redirect('/admin');
+                    }
+                    catch (e) {
+                        console.log(e);
+                        createError(500);
+                    }
                 }
             });
-        })};
 
-    let post = {};
-    post.title = req.body.title;
-    post.description = req.body.description;
-    post.text = req.body.text;
-    post.id = Number(req.params.id);
 
-    if (req.file) {
-
-        post.thumbnail = req.file.filename;
-        posts.findOne({id: Number(req.params.id)}, async (e, doc)=>{
-            if (!doc) {
-                createError(404);
-            }
-            else {
-                try {
-                    let path_full = path.join(__dirname, '../public/uploads/'+doc.thumbnail);
-                    let path_small = path.join(__dirname, '../public/uploads/small/'+doc.thumbnail);
-                    let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
-                    let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
-                    fs.unlink(path_full, (e)=>{
-                        console.log(e);
-                    });
-                    fs.unlink(path_small, (e)=>{
-                        console.log(e);
-                    });
-                    let u = update(req.params.id, post);
-                    let sh = sharp(path_from)
-                        .resize(400, 200, {fit: sharp.fit.inside })
-                        .toFile(path_to);
-                    await sh;
-                    await u;
-
-                    res.redirect('/admin');
+        }
+        else {
+            posts.findOne({id: Number(req.params.id)}, (e, doc)=>{
+                if (!doc) {
+                    createError(404);
                 }
-                catch (e) {
-                    console.log(e);
-                    createError(500);
-                }
-            }
-        });
-
-
-    }
-    else {
-        posts.findOne({id: Number(req.params.id)}, (e, doc)=>{
-            if (!doc) {
-                createError(404);
-            }
-            post.thumbnail = doc.thumbnail;
-            posts.update({id: Number(req.params.id)}, post, {}, (err, numReplaced)=>{
-               if (err) {
-                   console.log(err);
-                   createError(500);
-               }
-               else {
-                   res.redirect('/admin');
-               }
+                post.thumbnail = doc.thumbnail;
+                posts.update({id: Number(req.params.id)}, post, {}, (err, numReplaced)=>{
+                    if (err) {
+                        console.log(err);
+                        createError(500);
+                    }
+                    else {
+                        res.redirect('/admin');
+                    }
+                });
             });
-        });
+        }
     }
+
 });
 
 module.exports = {
