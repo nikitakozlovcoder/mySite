@@ -27,27 +27,49 @@
                     Контроль
                 </div>
             </div>
-        </div>
-            <div class="admin_posts_post">
-                <div class="admin_post_col_img">
-                    <img src="https://picsum.photos/200/300" alt="">
-                </div>
-                <div class="admin_post_col_title">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque deleniti ducimus ipsa non sunt.
-                </div>
-                <div class="admin_post_col_descr">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad architecto autem corporis dicta dolore dolores, ea, eveniet explicabo ipsam laborum mollitia, nam nemo nostrum placeat quae quidem totam veritatis voluptas.
-                </div>
-                <div class="admin_post_col_controls">
-                   <div class="admin_post_col_controls-change">изменить</div>
-                   <div class="admin_post_col_controls-delete">удалить</div>
-                </div>
+
+    {{#each posts}}
+        <div class="admin_posts_post" data-id="{{this.id}}" data-text="{{this.text}}" data-description="{{this.description}}" data-title="{{this.title}}">
+            <div class="admin_post_col_img">
+                <img src="../public/uploads/small/{{this.thumbnail}}" alt="" class="admin_post_col_img-image">
+            </div>
+            <div class="admin_post_col_title">
+                {{this.title}}
+            </div>
+            <div class="admin_post_col_descr">
+                {{this.description}}
+            </div>
+            <div class="admin_post_col_controls">
+                <div class="admin_post_col_controls-change">изменить</div>
+                <form action="/posts/delete/{{this.id}}" method="post">
+                    <input type="submit" class="admin_post_col_controls-delete" value="удалить">
+                </form>
             </div>
         </div>
 
+    {{/each}}
+
+        </div>
+    <div class="add_post">+ Добавить</div>
+
+    <form class="post_form" method="post" action="/posts/new"  enctype="multipart/form-data" style="display: none">
+        <h3>Создать пост</h3>
+        <div>Заголовок</div>
+        <input type="text" class="input" required="true" name="title" maxlength="80">
+        <div>Описание</div>
+        <textarea type="text" class="input" required="true" name="description" maxlength="300" rows="5"></textarea>
+        <div>Изображение</div>
+        <input type="file" class="input" required="true" name="thumbnail"  accept="image/*">
+        <img src="" alt="">
+        <div>Текст</div>
+        <textarea class="contact_input" name="text" rows="15"></textarea>
+        <br/>
+        <input type="submit" value="отправить" class="button">
+    </form>
 </section>
 
 <footer>
     <div>Сделано с  <i class="icon-heart"></i> ! @2020</div>
     <div>Никита Козлов</div>
 </footer>
+<script src="../public/javascripts/admin.js"></script>

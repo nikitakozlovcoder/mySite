@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-
+const createError = require('http-errors');
+const postsRouter = require('../routes/posts');
+let posts = postsRouter.db;
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'NekWeb' });
+  posts.find({ $not: { _id: '__autoid__' } }, (err, docs)=>{
+    if (err) {
+      console.log(err);
+      createError(500);
+    }
+    else {
+      res.render('index', { title: 'NekWeb', posts: docs });
+    }
+  });
 });
 
 router.post('/sendmail', function(req, res, next) {

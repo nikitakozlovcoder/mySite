@@ -29,8 +29,6 @@ router.get('/', function(req, res, next) {
     }
     else
     {
-       console.log('dashboard');
-       console.log(posts);
        posts.find({ $not: { _id: '__autoid__' } }, (err, docs)=>{
            if (err) {
                console.log(err);

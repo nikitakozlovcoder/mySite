@@ -54,8 +54,12 @@ router.get('/:id', function(req, res, next) {
 
 });
 router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
-
-
+    if (!req.session.user)
+    {
+        res.redirect('/admin/login');
+        return;
+    }
+    console.log(req.file);
     let insert = function(post) {
         return new Promise((resolve, reject)=>{
             posts.insert(post, (err, doc)=>{
@@ -93,8 +97,12 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
 
 });
 
-router.delete('/:id', (req, res)=>{
-
+router.post('/delete/:id', (req, res)=>{
+    if (!req.session.user)
+    {
+        res.redirect('/admin/login');
+        return;
+    }
     posts.findOne({id: Number(req.params.id)}, (e, post)=>{
         if (e) {
             console.log(e);
@@ -124,8 +132,12 @@ router.delete('/:id', (req, res)=>{
 
 });
 
-router.put('/:id', upload.single('thumbnail'),  (req, res)=>{
-
+router.post('/update/:id', upload.single('thumbnail'),  (req, res)=>{
+    if (!req.session.user)
+    {
+        res.redirect('/admin/login');
+        return;
+    }
     let update = function(id, post) {
         return new Promise((resolve, reject)=>{
             posts.update({id: Number(id)}, post, {}, (err, numReplaced)=>{

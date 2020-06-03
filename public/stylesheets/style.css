@@ -155,6 +155,9 @@ section:nth-child(2n) {
   height: 170px;
   object-fit: cover;
 }
+.blog_card p{
+  width: 100%;
+}
 .header_small {
   font-size: 13px;
   display: inline;
@@ -437,8 +440,8 @@ header nav ul li:last-child{
   padding: 0 0 15px 0;
   transition: box-shadow 0.25s ease-in-out;
 }
-.blog_card img{
-
+.blog_card .button{
+  margin-top: auto !important;
 }
 .blog_card .blog_card_title, .blog_card p{
   padding: 15px;
@@ -503,4 +506,8 @@ footer{
 }
 input[type='sybmit']{
   cursor: pointer;
+}
+.post_form img{
+  max-width: 400px;
+  padding-bottom: 25px;
 }

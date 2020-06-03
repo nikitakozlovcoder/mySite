@@ -240,34 +240,15 @@
         <h3 class="section-title">My Blog</h3>
         <div class="outline"><div class="outline_inner-line"></div></div>
         <div class="blog_cards">
-            <div class="blog_card card animate__animated" data-animate="animate__flipInY" data-time="250">
-                <img src="https://picsum.photos/200" alt="#">
-
-                <div class="blog_card_title">Lorem ipsum dolor sit.</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut earum fuga maiores odio quasi?</p>
-                <div class="button">read more</div>
-            </div>
-
-
-
-        <div class="blog_card card animate__animated" data-animate="animate__flipInY" data-time="250">
-            <img src="https://picsum.photos/225" alt="#">
-
-            <div class="blog_card_title">Lorem ipsum dolor sit.</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut earum fuga maiores odio quasi?</p>
-            <div class="button">read more</div>
+    {{#each posts}}
+        <div class="blog_card card animate__animated" data-animate="animate__flipInY" data-time="350">
+            <img src="../public/uploads/small/{{this.thumbnail}}" alt="#">
+            <div class="blog_card_title">{{this.title}}</div>
+            <p>{{this.description}}</p>
+            <div class="button">Читать полностью</div>
         </div>
-
-
-
-        <div class="blog_card card animate__animated" data-animate="animate__flipInY" data-time="250">
-            <img src="https://picsum.photos/230" alt="#">
-
-            <div class="blog_card_title">Lorem ipsum dolor sit.</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut earum fuga maiores odio quasi?</p>
-            <div class="button">read more</div>
+    {{/each}}
         </div>
-    </div>
     </div>
 </section>
 

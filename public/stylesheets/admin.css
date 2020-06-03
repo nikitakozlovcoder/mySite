@@ -36,8 +36,7 @@ footer{
     width: 100%;
 }
 .admin_posts{
-    margin: auto;
-
+    margin: 40px auto auto;
 }
 .admin_post_col_title{
     border-left: 0 !important;
@@ -63,6 +62,9 @@ footer{
 }
 .admin_post_col_controls-delete{
     color: #ff4d4c;
+    padding: 0;
+    border: 0;
+    background: 0;
 }
 .admin_post_col_img{
     display: flex;
@@ -84,13 +86,37 @@ footer{
 .admin_posts_head>div{
     display: block;
     min-height: auto;
+    border-bottom: 1px #636363 solid;
 }
 
 @media screen and (max-width: 661px) {
     .admin_post_col_descr{
-        display: none;
+        display: none !important;
     }
     .admin_post_col_title{
         width: calc(100% - 160px);
     }
+}
+h3{
+    text-align: left;
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+.post_form input{
+    margin-bottom: 20px;
+}
+input[type="file"]{
+    border: none;
+}
+textarea{
+    width: 100% !important;
+}
+.add_post{
+    margin-top: 20px;
+    cursor: pointer;
+    color: #ff7d0a;
+}
+.add_post:hover{
+    text-decoration: underline;
 }
