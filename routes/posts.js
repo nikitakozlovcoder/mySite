@@ -83,7 +83,7 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
                 let path_from = path.join(__dirname, '../public/uploads/', req.file.filename);
                 let path_to = path.join(__dirname, '../public/uploads/small/', req.file.filename);
                 let sh = sharp(path_from)
-                    .resize(400, 200, {fit: sharp.fit.inside })
+                    .resize(500, 300, {fit: sharp.fit.inside })
                     .toFile(path_to);
                 await sh;
             }
@@ -187,7 +187,7 @@ router.post('/update/:id', upload.single('thumbnail'),  (req, res)=>{
                         });
                         let u = update(req.params.id, post);
                         let sh = sharp(path_from)
-                            .resize(400, 200, {fit: sharp.fit.inside })
+                            .resize(500, 300, {fit: sharp.fit.inside })
                             .toFile(path_to);
                         await sh;
                         await u;

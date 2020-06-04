@@ -13,9 +13,16 @@
     }
     .blog_card{
         width: calc(50% - 20px);
+        display: flex;
+        flex-direction: column;
     }
-    .blog_card:nth-child(2n){
-        order: 1;
+    .blog_card a{
+        margin-top: auto !important;
+
+
+    }
+    .blog_card:nth-child(3n){
+
         width: 100%;
     }
     .skills_container-right{
@@ -78,11 +85,17 @@
      .latest_projects_container_project {
         background-attachment: scroll  !important;
     }
-    body{
 
-    }
 }
 @media screen and (min-width: 660px){
+    .blog_card img{
+        height: 170px !important;
+    }
+    .blog_card a{
+
+        align-self: flex-start;
+
+    }
     .scrolling .header_nav{
         background-color: white;
         color: #5d5d5d;
@@ -128,7 +141,7 @@
     .blog_card .button{
         align-self: flex-start;
     }
-    .blog_card:nth-child(2n){
+    .blog_card:nth-child(3n){
         width: calc(33.33% - 20px);
         order: initial;
     }
