@@ -389,7 +389,7 @@ header nav ul li:last-child{
  .skills_container_skill_progress_show{
    background-color: #1b2135;
    height: 5px;
-   width: 0%;
+   width: 0;
 
  }
 .latest_projects_container_project_title {

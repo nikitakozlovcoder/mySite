@@ -23,7 +23,7 @@ bcrypt.hash("admin", saltRounds, function(err, hash) {
 });
 
 router.get('/', function(req, res, next) {
-    if (false && !req.session.user)
+    if (!req.session.user)
     {
         res.redirect('/admin/login');
     }
