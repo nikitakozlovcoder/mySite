@@ -49,7 +49,7 @@ router.get('/all', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 
     posts.findOne({id: Number(req.params.id)}, (err, post)=>{
-        res.json(post);
+        res.render('post', { title: 'NekWeb', post: post, layout: false });
     });
 
 });

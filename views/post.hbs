@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="icon" href="../public/favicon.ico">
+    <link rel='stylesheet' href='../public/stylesheets/reset.css' />
+    <link rel='stylesheet' href='../public/stylesheets/fontello.css' />
+    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+    <link rel='stylesheet' href='../public/stylesheets/media.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel='stylesheet' href='../public/stylesheets/post.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+
+<header class="closed scrolling" >
+    <nav class="header_nav">
+        <div class="wrap">
+            <div class="header_nav_wrapper">
+                <a href=".."><div class="header_logo">Nek<span>W</span>eb</div></a>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="wrap post_section">
+    <img src="../public/uploads/{{post.thumbnail}}" alt="">
+    <h3>{{post.title}}</h3>
+    <p>{{post.description}}</p>
+    <p>{{post.text}}</p>
+</section>
+
+<footer>
+    <div>Сделано с  <i class="icon-heart"></i> ! @2020</div>
+    <div>Никита Козлов</div>
+</footer>
+</body>
+
+<script src="../public/javascripts/script.js"></script>
+</html>

@@ -1,5 +1,19 @@
-<link rel="stylesheet" href="../public/stylesheets/admin.css">
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="icon" href="../public/favicon.ico">
+    <link rel='stylesheet' href='../public/stylesheets/reset.css' />
+    <link rel='stylesheet' href='../public/stylesheets/fontello.css' />
+    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+    <link rel='stylesheet' href='../public/stylesheets/media.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../public/stylesheets/admin.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 <header class="closed scrolling" >
     <nav class="header_nav">
         <div class="wrap">
@@ -7,49 +21,52 @@
                 <a href=".."><div class="header_logo">Nek<span>W</span>eb</div></a>
 
             </div>
+            <a href="/admin/exit">
+                Выйти
+            </a>
         </div>
     </nav>
 </header>
 
 <section class="wrap">
-        <div class="admin_posts">
-            <div class="admin_posts_post admin_posts_head">
-                <div class="admin_post_col_img">
-                    Фото
-                </div>
-                <div class="admin_post_col_title">
-                    Заголовок
-                </div>
-                <div class="admin_post_col_descr">
-                    Описание
-                </div>
-                <div class="admin_post_col_controls">
-                    Контроль
-                </div>
-            </div>
-
-    {{#each posts}}
-        <div class="admin_posts_post" data-id="{{this.id}}" data-text="{{this.text}}" data-description="{{this.description}}" data-title="{{this.title}}">
+    <div class="admin_posts">
+        <div class="admin_posts_post admin_posts_head">
             <div class="admin_post_col_img">
-                <img src="../public/uploads/small/{{this.thumbnail}}" alt="" class="admin_post_col_img-image">
+                Фото
             </div>
             <div class="admin_post_col_title">
-                {{this.title}}
+                Заголовок
             </div>
             <div class="admin_post_col_descr">
-                {{this.description}}
+                Описание
             </div>
             <div class="admin_post_col_controls">
-                <div class="admin_post_col_controls-change">изменить</div>
-                <form action="/posts/delete/{{this.id}}" method="post">
-                    <input type="submit" class="admin_post_col_controls-delete" value="удалить">
-                </form>
+                Контроль
             </div>
         </div>
 
-    {{/each}}
+        {{#each posts}}
+            <div class="admin_posts_post" data-id="{{this.id}}" data-text="{{this.text}}" data-description="{{this.description}}" data-title="{{this.title}}">
+                <div class="admin_post_col_img">
+                    <img src="../public/uploads/small/{{this.thumbnail}}" alt="" class="admin_post_col_img-image">
+                </div>
+                <div class="admin_post_col_title">
+                    {{this.title}}
+                </div>
+                <div class="admin_post_col_descr">
+                    {{this.description}}
+                </div>
+                <div class="admin_post_col_controls">
+                    <div class="admin_post_col_controls-change">изменить</div>
+                    <form action="/posts/delete/{{this.id}}" method="post">
+                        <input type="submit" class="admin_post_col_controls-delete" value="удалить">
+                    </form>
+                </div>
+            </div>
 
-        </div>
+        {{/each}}
+
+    </div>
     <div class="add_post">+ Добавить</div>
 
     <form class="post_form" method="post" action="/posts/new"  enctype="multipart/form-data" style="display: none">
@@ -72,4 +89,14 @@
     <div>Сделано с  <i class="icon-heart"></i> ! @2020</div>
     <div>Никита Козлов</div>
 </footer>
+</body>
 <script src="../public/javascripts/admin.js"></script>
+<script src="../public/javascripts/script.js"></script>
+</html>
+
+
+
+
+
+
+

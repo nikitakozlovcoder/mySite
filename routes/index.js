@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
       createError(500);
     }
     else {
-      res.render('index', { title: 'NekWeb', posts: docs });
+      res.render('index', { title: 'NekWeb', posts: docs, layout: false });
     }
   });
 });

@@ -430,7 +430,10 @@ header nav ul li:last-child{
 .latest_projects_control-active{
   background-color: #ff7d0a;
 }
-
+.about_table_data a{
+  color: #ff7d0a;
+  font-weight: normal;
+}
 .blog_cards{
   margin-top:45px;
 }
@@ -440,7 +443,11 @@ header nav ul li:last-child{
   padding: 0 0 15px 0;
   transition: box-shadow 0.25s ease-in-out;
 }
-.blog_card .button{
+.header_nav ul li{
+  text-align: center;
+}
+
+.blog_card a{
   margin-top: auto !important;
 }
 .blog_card .blog_card_title, .blog_card p{
@@ -487,6 +494,7 @@ footer{
 }
 .contact_me_container{
   margin-top: 45px;
+
 }
 
 .skills_container_skill_name, .skills_container_skill_percentage{

@@ -52,7 +52,7 @@ router.get('/login', function(req, res, next) {
     }
     else
     {
-        let obj = { title: 'Admin', error: false};
+        let obj = { title: 'Admin', error: false, layout: false};
 
         if (req.session.valid === false) {
             obj.error = true;
@@ -63,7 +63,10 @@ router.get('/login', function(req, res, next) {
     }
 
 });
-
+router.get('/exit', function(req, res, next) {
+    req.session.user = null;
+    res.redirect('/admin/login');
+});
 
 router.post('/login', function(req, res, next) {
     console.log('login post');

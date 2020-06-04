@@ -1,0 +1,39 @@
+img{
+    padding-right: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: auto;
+    align-self: center;
+    float: left;
+    max-width: 600px;
+}
+.post_section {
+    margin: 75px auto 25px;
+    background: white !important;
+}
+h3  {
+    padding: 20px 0;
+}
+.post_section >p{
+    white-space: pre-line;
+}
+
+@media screen and (max-width: 900px) {
+    img{
+        float: none;
+        padding: 0;
+    }
+    .post_section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}

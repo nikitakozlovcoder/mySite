@@ -20,9 +20,11 @@
     }
     .skills_container-right{
         padding-left: 30px;
+        width: 50%;
     }
     .skills_container-left{
         padding-right: 30px;
+        width: 50%;
     }
     .skills_container{
         display: flex;
