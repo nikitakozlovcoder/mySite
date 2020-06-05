@@ -16,6 +16,7 @@ body {
   text-align: center;
   color: #5d5d5d;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 a {
@@ -353,7 +354,8 @@ header nav ul li:last-child{
   background-color: #f0f0f0;
   margin: 25px 10px;
   padding: 15px;
-  box-shadow: 0 5px 5px 0 #1f1f1f61;
+  box-shadow: 1px 2px 5px 0 #1f1f1f61;
+
   text-align: center;
 }
 
@@ -465,7 +467,7 @@ header nav ul li:last-child{
 
 }
 .blog_card:hover{
-  box-shadow: 0 5px 5px 0 #1f1f1f61;
+  box-shadow: 1px 5px 5px 1px #1f1f1f61;
 }
 .button:hover{
   border-color: transparent;

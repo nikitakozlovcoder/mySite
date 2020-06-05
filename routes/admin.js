@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
                createError(500);
            }
             else {
-               res.render('admin', { title: 'Admin', posts: docs});
+               res.render('admin', {posts: docs});
            }
 
         });

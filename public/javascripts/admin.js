@@ -24,8 +24,19 @@ function configure_form(obj)
     description.value = obj.description;
     text.value = obj.text;
     preview.src = obj.img;
+
     file.addEventListener('change', (e)=>{
-        readURL(file, preview);
+        let f = file.files[0];
+        if (f && f['type'].split('/')[0] === 'image'){
+            readURL(file, preview);
+        }
+        else
+        {
+
+            alert('Пожалуста, загрузите изображение');
+            file.value = null;
+        }
+
     });
     file.required = obj.id === 'new';
 

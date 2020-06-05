@@ -1,7 +1,9 @@
 .header_nav{
     position: relative;
 }
-
+section:nth-child(2n){
+    background-color: white;
+}
 .login_form{
     max-width: 500px;
     margin: auto;

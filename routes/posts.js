@@ -49,7 +49,7 @@ router.get('/all', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 
     posts.findOne({id: Number(req.params.id)}, (err, post)=>{
-        res.render('post', { title: 'NekWeb', post: post, layout: false });
+        res.render('post', { title: post.title, post: post, layout: false });
     });
 
 });
@@ -57,6 +57,7 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
     if (!req.session.user)
     {
         res.redirect('/admin/login');
+
 
     }else{
         console.log(req.file);
@@ -129,7 +130,7 @@ router.post('/delete/:id', (req, res)=>{
                         fs.unlink(path_full, ()=>{});
                         fs.unlink(path_small, ()=>{});
                         res.redirect('/admin');
-                    }
+                }
                 });
             }
 

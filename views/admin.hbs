@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{title}}</title>
+    <title>Админ</title>
     <link rel="icon" href="../public/favicon.ico">
     <link rel='stylesheet' href='../public/stylesheets/reset.css' />
     <link rel='stylesheet' href='../public/stylesheets/fontello.css' />
@@ -48,7 +48,7 @@
         {{#each posts}}
             <div class="admin_posts_post" data-id="{{this.id}}" data-text="{{this.text}}" data-description="{{this.description}}" data-title="{{this.title}}">
                 <div class="admin_post_col_img">
-                    <img src="../public/uploads/small/{{this.thumbnail}}" alt="" class="admin_post_col_img-image">
+                    <a href="/posts/{{this.id}}"><img src="../public/uploads/small/{{this.thumbnail}}" alt="" class="admin_post_col_img-image"></a>
                 </div>
                 <div class="admin_post_col_title">
                     {{this.title}}
