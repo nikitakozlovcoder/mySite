@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75f545f6-c350-4d1a-a283-5d9077c673e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/site.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/site.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +14,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/stylesheets/site.min.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="815">
-                  <caret column="15815" selection-start-column="15815" selection-end-column="15815" />
+                <state relative-caret-position="255">
+                  <caret column="13832" selection-start-column="13832" selection-end-column="13832" />
                 </state>
               </provider>
             </entry>
@@ -35,11 +32,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="530">
-                  <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
+                <state relative-caret-position="680">
+                  <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
                 </state>
               </provider>
             </entry>
@@ -166,7 +163,6 @@
         <option value="$PROJECT_DIR$/public/javascripts/script.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/media.css" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/post.hbs" />
         <option value="$PROJECT_DIR$/views/login.hbs" />
         <option value="$PROJECT_DIR$/views/admin.hbs" />
@@ -174,6 +170,7 @@
         <option value="$PROJECT_DIR$/public/stylesheets/temp.css" />
         <option value="$PROJECT_DIR$/views/index.hbs" />
         <option value="$PROJECT_DIR$/public/stylesheets/site.min.css" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -227,7 +224,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1591453080954" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1591453887373" />
     <property name="jsx.switch.disabled" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -298,12 +295,12 @@
       <workItem from="1591349525015" duration="959000" />
       <workItem from="1591357450741" duration="1925000" />
       <workItem from="1591366667213" duration="6893000" />
-      <workItem from="1591444883991" duration="5703000" />
+      <workItem from="1591444883991" duration="6328000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125801000" />
+    <option name="totallyTimeSpent" value="126426000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -515,13 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/post.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -573,8 +563,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/site.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret column="15815" selection-start-column="15815" selection-end-column="15815" />
+        <state relative-caret-position="255">
+          <caret column="13832" selection-start-column="13832" selection-end-column="13832" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
         </state>
       </provider>
     </entry>
