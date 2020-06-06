@@ -63,6 +63,7 @@ router.post('/new', upload.single('thumbnail'), async function(req, res, next) {
         console.log(req.file);
         let insert = function(post) {
             return new Promise((resolve, reject)=>{
+
                 posts.insert(post, (err, doc)=>{
                     if (err) reject(err);
                     resolve(doc);

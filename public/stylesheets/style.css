@@ -321,7 +321,7 @@ h3{
   margin: 0 auto;
 }
 header nav ul{
-  height: 274px;
+  height: 320px;
   overflow: hidden;
   transition: height 0.25s ease-in-out;;
 }
@@ -354,7 +354,7 @@ header nav ul li:last-child{
   background-color: #f0f0f0;
   margin: 25px 10px;
   padding: 15px;
-  box-shadow: 1px 2px 5px 0 #1f1f1f61;
+  box-shadow: 1px 2px 5px 0 rgba(31,31,31,0.38);
 
   text-align: center;
 }
@@ -467,7 +467,7 @@ header nav ul li:last-child{
 
 }
 .blog_card:hover{
-  box-shadow: 1px 5px 5px 1px #1f1f1f61;
+  box-shadow: 1px 5px 5px 1px rgba(31,31,31,0.38);
 }
 .button:hover{
   border-color: transparent;

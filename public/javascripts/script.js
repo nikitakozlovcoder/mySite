@@ -154,7 +154,7 @@ function isViewed(el)
 (function () {
 
     let links = Array.from(document.querySelectorAll('a')).filter(link => link.getAttribute( "href" )[0] === '#');
-    console.log(links);
+
 
     links.forEach((el)=>{
 
@@ -178,7 +178,7 @@ function animateAll(elems)
             let time = el.getAttribute('data-time') || 0;
 
             setTimeout(()=>{
-                console.log(time);
+
                 el.classList.add(el.getAttribute('data-animate'));
             }, time)
 
@@ -196,8 +196,10 @@ function animateAll(elems)
     });
 
 })();
+
 (function () {
     let form = document.querySelector('.contact_form');
+
     if ( form === null) {
         return;
 
@@ -205,13 +207,13 @@ function animateAll(elems)
 
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        let name = form.querySelectorAll('input')[0].value;
-        let mail = form.querySelectorAll('input')[1].value;
-        let text = form.querySelector('textarea').value;
+        let name = form.querySelectorAll('input')[0];
+        let mail = form.querySelectorAll('input')[1];
+        let text = form.querySelector('textarea');
         let msg = {
-          name: name,
-          mail: mail,
-          message: text
+          name: name.value,
+          mail: mail.value,
+          message: text.value
         };
         mail.value = "";
         name.value = "";

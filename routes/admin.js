@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-    console.log('login get');
+
     if (req.session.user)
     {
         res.redirect('/admin');
@@ -69,10 +69,10 @@ router.get('/exit', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    console.log('login post');
+
     if (req.session.user)
     {
-        console.log('5');
+
         res.redirect('/admin');
     }
     users.findOne({login: req.body.login}, (e, user)=> {
@@ -80,12 +80,12 @@ router.post('/login', function(req, res, next) {
         console.log(req.body.login);
         console.log(req.body.password);
         if (e) {
-            console.log(e);
+
             createError(500);
         } else if (!user) {
 
             req.session.valid = false;
-            console.log('1');
+
             res.redirect('/admin/login');
         }
         else{
@@ -95,14 +95,14 @@ router.post('/login', function(req, res, next) {
                 if (result)
                 {
                     req.session.user = user._id;
-                   // req.session.valid = null;
-                    console.log('2');
+
+
                     res.redirect('/admin');
                 }
                 else
                 {
                     req.session.valid = false;
-                    console.log('3');
+
                     res.redirect('/admin/login');
                 }
             });

@@ -101,7 +101,7 @@
         color: #5d5d5d;
     }
     .scrolling .header_nav{
-        box-shadow: -1px 3px 2px 0px #73737370;
+        box-shadow: -1px 3px 2px 0px rgba(115,115,115,0.439);
     }
     .header_nav  ul{
         height: auto !important;
