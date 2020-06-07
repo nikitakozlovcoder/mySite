@@ -2,8 +2,8 @@
     position: relative;
 }
 section:nth-child(2n){
-    background-color: white;
-}
+     background-color: white;
+ }
 .login_form{
     max-width: 500px;
     margin: auto;
@@ -13,6 +13,7 @@ body{
     display: flex;
     flex-flow: column;
     min-height: 100vh;
+    text-align: left;
 }
 
 footer{
