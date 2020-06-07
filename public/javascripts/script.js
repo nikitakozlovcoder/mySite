@@ -105,11 +105,19 @@ function isViewed(el)
 })();
 
 
-    function scroll(el) {
 
+
+
+
+
+
+(function () {
+    let interval;
+    function scroll(el) {
+        clearInterval(interval);
         let rect = el.getBoundingClientRect();
         let dist = rect.top + window.pageYOffset;
-       // window.scrollTo({top: dist-50, behavior:"smooth"});
+        // window.scrollTo({top: dist-50, behavior:"smooth"});
         let chank = -(window.pageYOffset -dist)/50;
         let down = true;
         if (window.pageYOffset >dist)
@@ -118,7 +126,7 @@ function isViewed(el)
 
         }
 
-        let interval = setInterval(()=>{
+         interval = setInterval(()=>{
 
             if (!down && window.pageYOffset === 0)
             {
@@ -146,12 +154,6 @@ function isViewed(el)
         }, 10);
 
     }
-
-
-
-
-
-(function () {
 
     let links = Array.from(document.querySelectorAll('a')).filter(link => link.getAttribute( "href" )[0] === '#');
 
