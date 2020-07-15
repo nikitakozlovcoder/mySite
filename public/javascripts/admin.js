@@ -33,7 +33,7 @@ function configure_form(obj)
         else
         {
 
-            alert('Пожалуста, загрузите изображение');
+            alert('Пожалуйста, загрузите изображение');
             file.value = null;
         }
 
