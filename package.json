@@ -2,6 +2,10 @@
   "name": "mysite",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "10.0.0",
+    "npm": ">=6.0.0"
+  },
   "dependencies": {
     "bcrypt": "^4.0.1",
     "cookie-parser": "~1.4.4",
